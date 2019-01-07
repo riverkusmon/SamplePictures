@@ -669,7 +669,7 @@ public class SimplePicture implements DigitalPicture
          ex.printStackTrace();
          return false;
      }
-         
+        
  }
  
  /**

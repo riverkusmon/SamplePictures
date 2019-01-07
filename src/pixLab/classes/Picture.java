@@ -129,7 +129,7 @@ public class Picture extends SimplePicture
       for (int col = 0; col < width / 2; col++)
       {
         leftPixel = pixels[row][col];
-        rightPixel = pixels[row][width - 1 - col];
+        rightPixel = pixels[row][width -1 - col];
         rightPixel.setColor(leftPixel.getColor());
       }
     } 
@@ -148,6 +148,23 @@ public class Picture extends SimplePicture
         rightPixel = pixels[row][col];
         leftPixel = pixels[row][width - 1 - col];
         leftPixel.setColor(rightPixel.getColor());
+      }
+    } 
+  }
+  
+  public void mirrorHorizontal()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    int top = pixels.length;
+    for (int col = 0; col < pixels[0].length; col++)
+    {
+      for (int row = 0; row < top/2; row++)
+      {
+        topPixel = pixels[row][col];
+        bottomPixel = pixels[top -1 -row][col];
+        bottomPixel.setColor(topPixel.getColor());
       }
     } 
   }
@@ -175,6 +192,36 @@ public class Picture extends SimplePicture
       }
     }
   }
+  
+  public void mirrorSeagull()
+  {
+	  int mirrorPoint = 350;
+	  int mirrorPoint2 = 410;
+	  Pixel leftPixel = null;
+	  Pixel rightPixel = null;
+	  int count = 0;
+	  Pixel[][] pixels = this.getPixels2D();
+	    
+	  // loop through the rows
+	  for (int row = 225; row < 325; row++)
+	  {
+		// loop from 13 to just before the mirror point
+	    for (int col = 230; col < mirrorPoint; col++)
+	    {
+	        
+	    	leftPixel = pixels[row][col];      
+	    	rightPixel = pixels[row]                       
+	                         [mirrorPoint - col + mirrorPoint];
+	        rightPixel.setColor(leftPixel.getColor());
+	        
+	        leftPixel = pixels[row][col];      
+	    	rightPixel = pixels[row]                       
+	                         [mirrorPoint2 - col + mirrorPoint2];
+	        rightPixel.setColor(leftPixel.getColor());
+	      }
+	    }
+  }
+  
   
   /** copy from the passed fromPic to the
     * specified startRow and startCol in the
@@ -210,13 +257,12 @@ public class Picture extends SimplePicture
   /** Method to create a collage of several pictures */
   public void createCollage()
   {
-    Picture flower1 = new Picture("flower1.jpg");
-    Picture flower2 = new Picture("flower2.jpg");
+    Picture flower1 = new Picture("mel.jpg");
+    Picture flower2 = new Picture("flowerboy.jpeg");
     this.copy(flower1,0,0);
     this.copy(flower2,100,0);
     this.copy(flower1,200,0);
     Picture flowerNoBlue = new Picture(flower2);
-    flowerNoBlue.zeroBlue();
     this.copy(flowerNoBlue,300,0);
     this.copy(flower1,400,0);
     this.copy(flower2,500,0);
@@ -257,10 +303,10 @@ public class Picture extends SimplePicture
    */
   public static void main(String[] args) 
   {
-    Picture beach = new Picture("beach.jpg");
-    beach.explore();
-    beach.zeroRed();
-    beach.explore();
+    Picture seagull = new Picture("seagull.jpg");
+    seagull.explore();
+    seagull.createCollage();
+    seagull.explore();
   }
   
 } // this } is the end of class Picture, put all new methods before this

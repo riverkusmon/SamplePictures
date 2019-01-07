@@ -26,6 +26,16 @@ public class PictureTester
     beach.explore();
   }
   
+  public static void testMirrorSeagull()
+  {
+	  Picture seagull = new Picture("seagull.jpg");
+	  seagull.explore();
+	  seagull.mirrorSeagull();
+	  seagull.explore();
+	  
+  }
+  
+  
   /** Method to test mirrorVertical */
   public static void testMirrorVertical()
   {
@@ -75,17 +85,18 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    testZeroBlue();
-    testZeroRed();
+   // testZeroBlue();
+   // testZeroRed();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
     //testNegate();
     //testGrayscale();
     //testFixUnderwater();
-    testMirrorVertical();
-    testMirrorVertical2();
+   // testMirrorVertical();
+    //testMirrorVertical2();
     //testMirrorTemple();
+	  testMirrorSeagull();
     //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();
