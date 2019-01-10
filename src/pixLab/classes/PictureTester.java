@@ -1,4 +1,7 @@
 package pixLab.classes;
+
+import java.awt.Color;
+
 /**
  * This class contains class (static) methods
  * that will help you test the Picture class 
@@ -34,6 +37,17 @@ public class PictureTester
 	  seagull.explore();
 	  
   }
+  
+  public static void testChromakey()
+  {
+	  Picture source = new Picture("mel.jpg");
+	  Picture background = new Picture("starrynight.jpg");
+	  source.explore();
+	  background.explore();
+	  source.chromakey(background, Color.YELLOW);
+	  source.explore();
+  }
+  
   
   
   /** Method to test mirrorVertical */
@@ -96,7 +110,8 @@ public class PictureTester
    // testMirrorVertical();
     //testMirrorVertical2();
     //testMirrorTemple();
-	  testMirrorSeagull();
+	  testChromakey();
+	  //testMirrorSeagull();
     //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();
