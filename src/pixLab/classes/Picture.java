@@ -297,6 +297,36 @@ public class Picture extends SimplePicture
     }
   }
   
+  public void shiftLeftRight(int amount)
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Picture temp = new Picture(this);
+	  Pixel [][] copied = temp.getPixels2D();
+	  
+	  int shiftedValue = amount;
+	  int width = pixels[0].length;
+	  
+	  for (int row = 0; row < pixels.length; row++)
+	  {
+		  for (int col =0; col < pixels[0].length; col++)
+		  {
+			  shiftedValue = (col + amount) % width;
+			  copied[row][col].setColor(pixels[row][shiftedValue].getColor());
+			  
+		  }
+	  }
+	  for (int row = 0; row < pixels.length; row++)
+	  {
+		  for (int col =0; col < pixels[0].length; col++)
+		  {
+			  shiftedValue = (col + amount) % width;
+			  copied[row][col].setColor(copied[row][col].getColor());
+			  
+		  }
+	  }
+	  
+  }
+  
   public void chromakey(Picture replacement, Color changeColor)
   {
 	  Pixel [][] mainPixels = this.getPixels2D();
