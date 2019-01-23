@@ -311,6 +311,10 @@ public class Picture extends SimplePicture
 		  for (int col =0; col < pixels[0].length; col++)
 		  {
 			  shiftedValue = (col + amount) % width;
+			  if (amount < 0)
+			  {
+				  shiftedValue = ((col + amount) % width + width) % width;
+			  }
 			  copied[row][col].setColor(pixels[row][shiftedValue].getColor());
 			  
 		  }
@@ -319,7 +323,35 @@ public class Picture extends SimplePicture
 	  {
 		  for (int col =0; col < pixels[0].length; col++)
 		  {
-			  shiftedValue = (col + amount) % width;
+			  copied[row][col].setColor(copied[row][col].getColor());
+			  
+		  }
+	  }
+	  
+  }
+  
+  public void shiftUpDown(int amount)
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Picture temp = new Picture(this);
+	  Pixel [][] copied = temp.getPixels2D();
+	  
+	  int shiftedValue = amount;
+	  int height = pixels[0].length;
+	  
+	  for (int row = 0; row < pixels.length; row++)
+	  {
+		  for (int col =0; col < pixels[0].length; col++)
+		  {
+			  shiftedValue = Math.abs((col + amount) % height);
+			  copied[row][col].setColor(pixels[shiftedValue][col].getColor());
+			  
+		  }
+	  }
+	  for (int row = 0; row < pixels.length; row++)
+	  {
+		  for (int col =0; col < pixels[0].length; col++)
+		  {
 			  copied[row][col].setColor(copied[row][col].getColor());
 			  
 		  }
@@ -344,15 +376,107 @@ public class Picture extends SimplePicture
 	  }
   }
   
+  public void glitchArt()
+  {
+	  
+
+	  
+	  //
+	    Pixel[][] pixels = this.getPixels2D();
+	    Pixel leftPixel = null;
+	    Pixel rightPixel = null;
+	    int width = pixels[0].length;
+	    for (int row = 0; row < pixels.length; row++)
+	    {
+	      for (int col = 0; col < width / 2; col++)
+	      {
+	        leftPixel = pixels[row][col];
+	        rightPixel = pixels[row][width -1 - col];
+	        rightPixel.setColor(leftPixel.getColor());
+	      }
+	    } 
+	  
+	  //
+		  
+			    
+	    Pixel topPixel = null;
+	    Pixel bottomPixel = null;
+	    int top = pixels.length;
+	    for (int col = 0; col < pixels[0].length; col++)
+	    {
+	      for (int row = 0; row < top/2; row++)
+	      {
+	        topPixel = pixels[row][col];
+	        bottomPixel = pixels[top -1 -row][col];
+	        bottomPixel.setColor(topPixel.getColor());
+	      }
+	    }
+	    //
+	    int mirrorPoint = 276;
+	    int count = 0;
+	    
+	    // loop through the rows
+	    for (int row = 27; row < 97; row++)
+	    {
+	      // loop from 13 to just before the mirror point
+	      for (int col = 13; col < mirrorPoint; col++)
+	      {
+	        
+	        leftPixel = pixels[row][col];      
+	        rightPixel = pixels[row]                       
+	                         [mirrorPoint - col + mirrorPoint];
+	        rightPixel.setColor(leftPixel.getColor());
+	      }
+	    }
+	    
+	    //
+	    Picture trippie = new Picture("trippie.png");
+	    Picture flowerboy = new Picture("flowerboy.jpeg");
+	    this.copy(trippie,0,0);
+	    this.copy(flowerboy,100,0);
+	    this.copy(trippie,200,0);
+	    Picture flowerNoBlue = new Picture(flowerboy);
+	    this.copy(flowerNoBlue,300,0);
+	    this.copy(trippie,400,0);
+	    this.copy(flowerboy,500,0);
+	    this.mirrorVertical();
+	    this.write("collage.jpg");
+	    this.copy(flowerNoBlue,400,0);
+	    this.copy(trippie,600,0);
+	    this.copy(flowerboy,700,0);
+	    //
+	    
+		  int mirrorPoint2 = 150;
+		    
+		  // loop through the rows
+		  for (int row = 100; row < 325; row++)
+		  {
+			// loop from 13 to just before the mirror point
+		    for (int col = 200; col < mirrorPoint; col++)
+		    {
+		        
+		    	leftPixel = pixels[row][col];      
+		    	rightPixel = pixels[row]                       
+		                         [mirrorPoint - col + mirrorPoint];
+		        rightPixel.setColor(leftPixel.getColor());
+		        
+		        leftPixel = pixels[row][col];      
+		    	rightPixel = pixels[row]                       
+		                         [mirrorPoint2 - col + mirrorPoint2];
+		        rightPixel.setColor(leftPixel.getColor());
+		      }
+		    }
+  }
+  
   /* Main method for testing - each class in Java can have a main 
    * method 
    */
   public static void main(String[] args) 
   {
-    Picture seagull = new Picture("seagull.jpg");
-    seagull.explore();
-    seagull.createCollage();
-    seagull.explore();
+    Picture glitch = new Picture("ksg.jpg");
+    glitch.explore();
+    glitch.glitchArt();
+    glitch.explore();
   }
   
 } // this } is the end of class Picture, put all new methods before this
