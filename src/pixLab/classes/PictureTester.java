@@ -21,6 +21,21 @@ public class PictureTester
     beach.explore();
   }
   
+  
+  public static void testSteganography()
+  {
+	  Picture source = new Picture("jimi.png");
+			  
+	  Picture message = new Picture("ksg.jpg");
+	  source.explore();
+	  message.explore();
+	  source.hidePicture(message);
+	  source.explore();
+	  source.revealPicture();
+	  source.explore();
+	  
+  }
+  
   public static void testZeroRed()
   {
     Picture beach = new Picture("beach.jpg");
@@ -110,8 +125,9 @@ public class PictureTester
    // testMirrorVertical();
     //testMirrorVertical2();
     //testMirrorTemple();
-	  testChromakey();
+	 // testChromakey();
 	  //testMirrorSeagull();
+	  testSteganography();
     //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();

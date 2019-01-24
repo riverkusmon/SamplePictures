@@ -359,6 +359,57 @@ public class Picture extends SimplePicture
 	  
   }
   
+  public void revealPicture()
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  
+	  for(int row = 0; row < pixels.length; row++)
+	  {
+		  for(int col = 0; col < pixels[0].length; col++)
+		  {
+			  // there is a message to reveal
+			  if (pixels[row][col].getRed() % 2 != 1)
+			  {
+				  pixels[row][col].setColor(Color.CYAN);
+		
+			  }
+			  
+			  else if (pixels[row][col].getRed() % 2 == 1)
+			  {
+				  pixels[row][col].setColor(Color.GRAY);
+			  }
+		  }
+		  
+	  }
+  }
+  
+  public void hidePicture(Picture hidden)
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Pixel[][] hiddenPixels = hidden.getPixels2D();
+	  
+	  for (int row = 0; row < pixels.length && row < hiddenPixels.length; row++)
+	  {
+		  for (int col = 0; row < pixels[0].length && col < hiddenPixels[0].length; row++)
+		  {
+			  // there is a message to hide
+			  if (hiddenPixels[row][col].colorDistance(Color.WHITE) > 5)
+			  {
+				  if (pixels[row][col].getRed() > 0 && pixels[row][col].getRed() % 2 != 1)
+						  {
+					  		pixels[row][col].setRed(pixels[row][col].getRed() - 1);
+						  }
+			  }
+			  
+			  else if (pixels[row][col].getRed() > 0 && pixels[row][col].getRed() % 2 == 1)
+			  {
+				  
+				  pixels[row][col].setRed(pixels[row][col].getRed() - 1);
+			  }
+		  }  
+	  }
+  }
+  
   public void chromakey(Picture replacement, Color changeColor)
   {
 	  Pixel [][] mainPixels = this.getPixels2D();
